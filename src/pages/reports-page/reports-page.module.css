@@ -25,6 +25,11 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-base);
+  overflow-x: auto;
+}
+
+.tableContainer {
+  overflow-x: auto;
 }
 
 .reportsTable th {
@@ -32,13 +37,13 @@
   color: var(--color-text-primary);
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-sm);
-  padding: var(--space-4) var(--space-6);
+  padding: var(--space-2) var(--space-2);
   text-align: left;
   border: 1px solid var(--color-border-dark);
 }
 
 .reportsTable td {
-  padding: var(--space-4) var(--space-6);
+  padding: var(--space-1) var(--space-2);
   border: 1px solid var(--color-border-dark);
   color: var(--color-text-primary);
   font-size: var(--font-size-sm);

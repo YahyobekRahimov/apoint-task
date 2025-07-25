@@ -1,6 +1,8 @@
 import { type ReactNode } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./main-layout.module.css";
+import { useAppDispatch, useTypedSelector } from "@/store";
+import { logout } from "@/store/slices/authSlice";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -9,14 +11,16 @@ interface MainLayoutProps {
 export default function MainLayout({ children }: MainLayoutProps) {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useAppDispatch();
 
   const handleLogout = () => {
-    localStorage.removeItem("isAuthenticated");
+    dispatch(logout());
     navigate("/login");
   };
 
-  const isAuthenticated =
-    localStorage.getItem("isAuthenticated") === "true";
+  const isAuthenticated = useTypedSelector(
+    (state) => state.auth.isAuthenticated
+  );
 
   if (!isAuthenticated) {
     return <>{children}</>;
@@ -59,13 +63,6 @@ export default function MainLayout({ children }: MainLayoutProps) {
       <main className={styles.main}>
         <div className={styles.contentWrapper}>{children}</div>
       </main>
-
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <p className={styles.footerText}>
-          © 2025 Apoint. All rights reserved.
-        </p>
-      </footer>
     </div>
   );
 }
