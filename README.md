@@ -1,4 +1,76 @@
-# Apoint Task - Material Reports Management SystemA modern React application for managing and visualizing material reports with hierarchical category structures, built with React 19, TypeScript, and Redux Toolkit.## 🚀 Features### 🔐 Authentication- Login page with modern UI using shadcn/ui components- Protected routes with authentication guards- Responsive form design with CSS modules### 📊 Reports Dashboard- **Hierarchical Data Display**: Parent categories → Child categories → Individual materials- **Interactive Collapsible Rows**: Expand/collapse functionality with animated arrow icons- **Color-coded Materials**: Visual color indicators with hex color circles and names- **Data Aggregation**: Automatic calculation and display of totals for all "remind" properties- **Summary Row**: Top-level totals for quick overview- **Responsive Table Design**: Mobile-friendly with proper styling### 🎨 Modern UI Components- **Reusable Components**: Modular table rows and color display components- **CSS Modules**: Scoped styling for better maintainability- **Design System**: Consistent design tokens and global styles- **shadcn/ui Integration**: Professional UI components- **Smooth Animations**: Transition effects for better UX### 🏗️ Architecture- **React Router v6+**: Object-based routing configuration- **Redux Toolkit**: State management with RTK Query for API calls- **TypeScript**: Full type safety throughout the application- **Component Architecture**: Reusable, maintainable component structure## 🛠️ Tech Stack- **Frontend Framework**: React 19- **Language**: TypeScript- **Routing**: React Router DOM v7- **State Management**: Redux Toolkit + RTK Query- **Styling**: CSS Modules + Tailwind CSS- **UI Components**: shadcn/ui + Radix UI- **Icons**: Lucide React- **Build Tool**: Vite- **Linting**: ESLint## 📁 Project Structure`src/├── components/│   ├── layouts/          # Layout components (MainLayout)│   └── ui/               # Reusable UI components│       ├── button.tsx│       ├── color-display.tsx│       └── reusable-table-row.tsx├── pages/│   ├── login-page/       # Login page with authentication│   └── reports-page/     # Main reports dashboard│       └── components/   # Report-specific components│           ├── parent-category/│           └── child-category/├── router/               # React Router configuration├── services/             # API services and RTK Query│   └── features/│       ├── auth/│       └── reports/├── store/                # Redux store configuration├── styles/               # Global styles and CSS modules└── utils/                # Utility functions`
+# Apoint Task - Material Reports Management System
+
+A modern React application for managing and visualizing material reports with hierarchical category structures, built with React 19, TypeScript, and Redux Toolkit.
+
+## 🚀 Features
+
+### 🔐 Authentication
+
+- Login page with modern UI using shadcn/ui components
+- Protected routes with authentication guards
+- Responsive form design with CSS modules
+
+### 📊 Reports Dashboard
+
+- **Hierarchical Data Display**: Parent categories → Child categories → Individual materials
+- **Interactive Collapsible Rows**: Expand/collapse functionality with animated arrow icons
+- **Color-coded Materials**: Visual color indicators with hex color circles and names
+- **Data Aggregation**: Automatic calculation and display of totals for all "remind" properties
+- **Summary Row**: Top-level totals for quick overview
+- **Responsive Table Design**: Mobile-friendly with proper styling
+
+### 🎨 Modern UI Components
+
+- **Reusable Components**: Modular table rows and color display components
+- **CSS Modules**: Scoped styling for better maintainability
+- **Design System**: Consistent design tokens and global styles
+- **shadcn/ui Integration**: Professional UI components
+- **Smooth Animations**: Transition effects for better UX
+
+### 🏗️ Architecture
+
+- **React Router v6+**: Object-based routing configuration
+- **Redux Toolkit**: State management with RTK Query for API calls
+- **TypeScript**: Full type safety throughout the application
+- **Component Architecture**: Reusable, maintainable component structure
+
+## 🛠️ Tech Stack
+
+- **Frontend Framework**: React 19
+- **Language**: TypeScript
+- **Routing**: React Router DOM v7
+- **State Management**: Redux Toolkit + RTK Query
+- **Styling**: CSS Modules + Tailwind CSS
+- **UI Components**: shadcn/ui + Radix UI
+- **Icons**: Lucide React
+- **Build Tool**: Vite
+- **Linting**: ESLint
+
+## 📁 Project Structure
+
+```
+src/
+├── components/
+│   ├── layouts/          # Layout components (MainLayout)
+│   └── ui/               # Reusable UI components
+│       ├── button.tsx
+│       ├── color-display.tsx
+│       └── reusable-table-row.tsx
+├── pages/
+│   ├── login-page/       # Login page with authentication
+│   └── reports-page/     # Main reports dashboard
+│       └── components/   # Report-specific components
+│           ├── parent-category/
+│           └── child-category/
+├── router/               # React Router configuration
+├── services/             # API services and RTK Query
+│   └── features/
+│       ├── auth/
+│       └── reports/
+├── store/                # Redux store configuration
+├── styles/               # Global styles and CSS modules
+└── utils/                # Utility functions
+```
 
 ## 🚦 Getting Started
 
