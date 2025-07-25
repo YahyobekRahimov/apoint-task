@@ -1,3 +1,4 @@
+import { useTypedSelector } from "@/store";
 import { Navigate } from "react-router-dom";
 
 interface ProtectedRouteProps {
@@ -7,8 +8,11 @@ interface ProtectedRouteProps {
 export default function ProtectedRoute({
   children,
 }: ProtectedRouteProps) {
-  const isAuthenticated =
-    localStorage.getItem("isAuthenticated") === "true";
+  const isAuthenticated = useTypedSelector(
+    (state) => state.auth.isAuthenticated
+  );
+
+  console.log("isAuthenticated:", isAuthenticated);
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;

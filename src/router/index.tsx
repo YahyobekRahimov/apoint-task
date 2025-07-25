@@ -1,12 +1,12 @@
+import { useTypedSelector } from "@/store";
 import {
   createBrowserRouter,
-  RouterProvider,
   Navigate,
+  RouterProvider,
 } from "react-router-dom";
-import { LoginPage, ReportsPage } from "../pages";
-import ProtectedRoute from "../components/protected-route";
 import { MainLayout } from "../components/layouts";
-import { useTypedSelector } from "@/store";
+import ProtectedRoute from "../components/protected-route";
+import { LoginPage, ReportsPage } from "../pages";
 
 export default function Router() {
   const { isAuthenticated } = useTypedSelector((state) => state.auth);
@@ -23,7 +23,11 @@ export default function Router() {
     },
     {
       path: "/login",
-      element: <LoginPage />,
+      element: isAuthenticated ? (
+        <Navigate to="/reports" replace />
+      ) : (
+        <LoginPage />
+      ),
     },
     {
       path: "/reports",
@@ -45,5 +49,6 @@ export default function Router() {
       ),
     },
   ]);
+
   return <RouterProvider router={router} />;
 }

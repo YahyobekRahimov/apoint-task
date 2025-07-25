@@ -9,7 +9,9 @@ import styles from "./login-page.module.css";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
+
   const [login, { isLoading }] = useLoginMutation();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -29,7 +31,6 @@ export default function LoginPage() {
       }).unwrap();
 
       // Store auth state
-      localStorage.setItem("isAuthenticated", "true");
       toast.success("Login successful!");
       navigate("/reports");
     } catch (error) {
@@ -47,7 +48,6 @@ export default function LoginPage() {
             Sign in to your account to continue
           </p>
         </div>
-
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.fieldGroup}>
             <label htmlFor="username" className={styles.label}>
@@ -89,10 +89,6 @@ export default function LoginPage() {
             {isLoading ? "Signing in..." : "Sign In"}
           </Button>
         </form>
-
-        <div className={styles.footer}>
-          <p>Don't have an account? Contact your administrator</p>
-        </div>
       </div>
     </div>
   );

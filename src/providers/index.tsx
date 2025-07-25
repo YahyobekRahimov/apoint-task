@@ -1,3 +1,4 @@
+import { Toaster } from "sonner";
 import AuthInitializer from "./auth-init";
 import ReduxProvider from "./redux";
 
@@ -10,9 +11,9 @@ export default function Providers({
     <>
       <ReduxProvider>
         <AuthInitializer />
+        <Toaster />
         {children}
       </ReduxProvider>
-      ;
     </>
   );
 }

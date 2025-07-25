@@ -1,9 +1,9 @@
 import apiClient from "@/services/api-client";
-import type { MaterialsParams } from "./types";
+import type { MaterialsParams, MaterialsRes } from "./types";
 
 const reportsApi = apiClient.injectEndpoints({
   endpoints: (build) => ({
-    getMaterials: build.query<MaterialsParams, MaterialsParams>({
+    getMaterials: build.query<MaterialsRes[], MaterialsParams>({
       query: (params) => ({
         url: "reports/reports/materials",
         params,
