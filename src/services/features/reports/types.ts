@@ -9,7 +9,7 @@ export interface MaterialsRes {
   category: string;
   parent: string;
   material_id: number;
-  color: string | null;
+  color: IColor | null;
   code: string;
   last_price: number;
   min_amount: number;
@@ -23,4 +23,15 @@ export interface MaterialsRes {
   remind_outgo_sum: number;
   remind_end_amount: number;
   remind_end_sum: number;
+}
+
+export interface IColor {
+  colors_id: number;
+  name: string;
+  color: string;
+  is_deleted: null;
+  deleted_at: null;
+  created_at: number;
+  updated_at: number;
+  pantone: string;
 }

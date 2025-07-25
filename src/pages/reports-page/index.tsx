@@ -4,12 +4,12 @@ import type { MaterialsRes } from "@/services/features/reports/types";
 import ParentCategory from "./components/parent-category";
 
 export interface IParentCategory
-  extends Omit<MaterialsRes, "category" | "parent"> {
+  extends Omit<Partial<MaterialsRes>, "category" | "parent"> {
   childrenCount: number;
 }
 
 export interface IChildCategory
-  extends Omit<MaterialsRes, "category"> {
+  extends Omit<Partial<MaterialsRes>, "category"> {
   childrenCount: number;
 }
 
@@ -32,30 +32,56 @@ export default function ReportsPage() {
     );
 
     if (material.parent && !existingParent) {
+      const filteredMaterials = materials.filter(
+        (m) => m.parent === material.parent
+      );
+      const sumProperties = [
+        "remind_start_amount",
+        "remind_start_sum",
+        "remind_income_amount",
+        "remind_income_sum",
+        "remind_outgo_amount",
+        "remind_outgo_sum",
+        "remind_end_amount",
+        "remind_end_sum",
+      ];
+
       parentCategories.push({
-        ...material,
         childrenCount: 1,
         name: material.parent,
+        ...getSumOfProperties(filteredMaterials, sumProperties),
       });
     } else if (existingParent) {
       existingParent.childrenCount += 1;
     }
 
     if (material.category && !existingCategory) {
+      const filteredMaterials = materials.filter(
+        (m) =>
+          m.category === material.category &&
+          m.parent === material.parent
+      );
+      const sumProperties = [
+        "remind_start_amount",
+        "remind_start_sum",
+        "remind_income_amount",
+        "remind_income_sum",
+        "remind_outgo_amount",
+        "remind_outgo_sum",
+        "remind_end_amount",
+        "remind_end_sum",
+      ];
+
       childCategories.push({
-        ...material,
         childrenCount: 1,
         name: material.category,
         parent: material.parent,
+        ...getSumOfProperties(filteredMaterials, sumProperties),
       });
     } else if (existingCategory) {
       existingCategory.childrenCount += 1;
     }
   });
-
-  console.log("parentCategories", parentCategories);
-  console.log("childCategories", childCategories);
-  console.log("materials", materials);
 
   return (
     <div className={styles.container}>
@@ -65,10 +91,25 @@ export default function ReportsPage() {
       <table className={styles.reportsTable}>
         <thead>
           <tr>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Actions</th>
+            <th rowSpan={2}>Наименование</th>
+            <th rowSpan={2}>Цвет</th>
+            <th rowSpan={2}>Ед изм</th>
+            <th rowSpan={2}>Артикул</th>
+            <th rowSpan={2}>Цена учетная</th>
+            <th colSpan={2}>Сальдо начало периода</th>
+            <th colSpan={2}>Приход</th>
+            <th colSpan={2}>Расход</th>
+            <th colSpan={2}>Сальдо на конец периода</th>
+          </tr>
+          <tr>
+            <th>Кол-во</th>
+            <th>Сумма</th>
+            <th>Кол-во</th>
+            <th>Сумма</th>
+            <th>Кол-во</th>
+            <th>Сумма</th>
+            <th>Кол-во</th>
+            <th>Сумма</th>
           </tr>
         </thead>
         <tbody>
@@ -86,4 +127,20 @@ export default function ReportsPage() {
       </table>
     </div>
   );
+}
+
+function getSumOfProperties(
+  materials: MaterialsRes[] | undefined,
+  properties: string[]
+) {
+  if (!materials) return {};
+  const sums: Record<string, number> = {};
+  materials.forEach((item) => {
+    properties.forEach((key) => {
+      sums[key] =
+        (sums[key] || 0) +
+        ((item[key as keyof MaterialsRes] as number) || 0);
+    });
+  });
+  return sums;
 }

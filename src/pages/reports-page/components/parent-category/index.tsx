@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { IChildCategory, IParentCategory } from "../..";
-import { Button } from "@/components/ui/button";
+import { ReusableTableRow } from "@/components/ui/reusable-table-row";
 import ChildCategory from "../child-category";
 import type { MaterialsRes } from "@/services/features/reports/types";
 import styles from "./parent-category.module.css";
@@ -19,19 +19,19 @@ export default function ParentCategory({
 
   return (
     <>
-      <tr className={styles.parentCategory}>
-        <td>
-          <Button onClick={() => setCollapsed(!collapsed)}>
-            {collapsed ? "-" : "+"}
-          </Button>
-          {`${parentCategory.name} (${parentCategory.childrenCount})`}
-        </td>
-      </tr>
+      <ReusableTableRow
+        data={parentCategory}
+        className={styles.parentCategory}
+        hasButton={true}
+        isExpanded={collapsed}
+        onButtonClick={() => setCollapsed(!collapsed)}
+      />
 
       {collapsed &&
         childCategories &&
-        childCategories.map((childCategory) => (
+        childCategories?.map((childCategory) => (
           <ChildCategory
+            key={childCategory.name}
             childCategory={childCategory}
             materials={materials?.filter(
               (material) =>
