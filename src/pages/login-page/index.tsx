@@ -1,14 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLoginMutation } from "@/services/features/auth";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { Eye, EyeOff } from "lucide-react"; // Import icons for the eye button
 import styles from "./login-page.module.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+
+  const passwordInputRef = useRef<HTMLInputElement>(null); // Ref for password input
 
   const navigate = useNavigate();
 
@@ -37,6 +41,11 @@ export default function LoginPage() {
       console.error("Login failed:", error);
       toast.error("Login failed. Please check your credentials.");
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+    passwordInputRef.current?.focus(); // Shift focus to password input
   };
 
   return (
@@ -68,15 +77,32 @@ export default function LoginPage() {
             <label htmlFor="password" className={styles.label}>
               Password
             </label>
-            <Input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required
-              disabled={isLoading}
-            />
+            <div className={styles.passwordWrapper}>
+              <Input
+                ref={passwordInputRef} // Attach ref to password input
+                type={showPassword ? "text" : "password"} // Toggle input type
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+                disabled={isLoading}
+              />
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className={styles.eyeButton}
+                aria-label={
+                  showPassword ? "Hide password" : "Show password"
+                }
+              >
+                {showPassword ? (
+                  <EyeOff size={16} />
+                ) : (
+                  <Eye size={16} />
+                )}
+              </button>
+            </div>
           </div>
 
           <Button
