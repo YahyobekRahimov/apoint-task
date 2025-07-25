@@ -1,0 +1,10 @@
+.childCategory td:first-child {
+  padding-left: 70px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.childCategoryItem td:first-child {
+  padding-left: 100px;
+}

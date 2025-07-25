@@ -1,7 +1,7 @@
 import { useGetMaterialsQuery } from "@/services/features/reports";
 import styles from "./reports-page.module.css";
 import type { MaterialsRes } from "@/services/features/reports/types";
-import Categories from "./components/categories";
+import ParentCategory from "./components/parent-category";
 
 export interface IParentCategory
   extends Omit<MaterialsRes, "category" | "parent"> {
@@ -73,17 +73,14 @@ export default function ReportsPage() {
         </thead>
         <tbody>
           {parentCategories?.map((report) => (
-            <>
-              <tr key={report.name}>
-                <td>{report.name}</td>
-                <td>{report.childrenCount}</td>
-              </tr>
-              <Categories
-                childCategories={childCategories.filter(
-                  (child) => child.parent === report.name
-                )}
-              />
-            </>
+            <ParentCategory
+              key={report.name}
+              materials={materials}
+              parentCategory={report}
+              childCategories={childCategories.filter(
+                (child) => child.parent === report.name
+              )}
+            />
           ))}
         </tbody>
       </table>
